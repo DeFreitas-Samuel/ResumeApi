@@ -442,16 +442,244 @@ namespace ResumeApi.Controllers
         }
         #endregion
 
-        // PUT api/<resume>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        #region PutMethodsRegion
+        
+        [BasicAuthorization]
+        [HttpPut("basics/profiles/{network}")]
+        public ActionResult<Profile> Put(string network, [FromBody] Profile profile)
         {
+            var filter = initialResume.Basic.Profiles.Find(e => e.Network == network);
+            if (filter != null)
+            {
+                int index = initialResume.Basic.Profiles.FindIndex(0, e => e == filter);
+                initialResume.Basic.Profiles[index] = profile;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
         }
 
-        // DELETE api/<resume>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [BasicAuthorization]
+        [HttpPut("works/{company}")]
+        public ActionResult<Profile> Put(string company, [FromBody] Work work)
         {
+            var filter = initialResume.Works.Find(e => e.Company == company);
+            if (filter != null)
+            {
+                int index = initialResume.Works.FindIndex(0, e => e == filter);
+                initialResume.Works[index] = work;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
         }
+
+        [BasicAuthorization]
+        [HttpPut("volunteers/{organization}")]
+        public ActionResult<Profile> Put(string organization, [FromBody] Volunteer volunteer)
+        {
+            var filter = initialResume.Volunteers.Find(e => e.Organization == organization);
+            if (filter != null)
+            {
+                int index = initialResume.Volunteers.FindIndex(0, e => e == filter);
+                initialResume.Volunteers[index] = volunteer;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpPut("education/{institution}")]
+        public ActionResult<Profile> Put(string institution, [FromBody] Education education)
+        {
+            var filter = initialResume.Educations.Find(e => e.Institution == institution);
+            if (filter != null)
+            {
+                int index = initialResume.Educations.FindIndex(0, e => e == filter);
+                initialResume.Educations[index] = education;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpPut("awards/{title}")]
+        public ActionResult<Profile> Put(string title, [FromBody] Award award)
+        {
+            var filter = initialResume.Awards.Find(e => e.Title == title);
+            if (filter != null)
+            {
+                int index = initialResume.Awards.FindIndex(0, e => e == filter);
+                initialResume.Awards[index] = award;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpPut("publications/{title}")]
+        public ActionResult<Profile> Put(string name, [FromBody] Publication publication)
+        {
+            var filter = initialResume.Publications.Find(e => e.Name == name);
+            if (filter != null)
+            {
+                int index = initialResume.Publications.FindIndex(0, e => e == filter);
+                initialResume.Publications[index] = publication;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpPut("skills/{name}")]
+        public ActionResult<Profile> Put(string name, [FromBody] Skill skill)
+        {
+            var filter = initialResume.Skills.Find(e => e.Name == name);
+            if (filter != null)
+            {
+                int index = initialResume.Skills.FindIndex(0, e => e == filter);
+                initialResume.Skills[index] = skill;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
+        }
+
+
+        [BasicAuthorization]
+        [HttpPut("languages/{language}")]
+        public ActionResult<Profile> Put(string languag, [FromBody] Language language)
+        {
+            var filter = initialResume.Languages.Find(e => e.Languag == languag);
+            if (filter != null)
+            {
+                int index = initialResume.Languages.FindIndex(0, e => e == filter);
+                initialResume.Languages[index] = language;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpPut("interests/{name}")]
+        public ActionResult<Profile> Put(string name, [FromBody] Interest interest)
+        {
+            var filter = initialResume.Interests.Find(e => e.Name == name);
+            if (filter != null)
+            {
+                int index = initialResume.Interests.FindIndex(0, e => e == filter);
+                initialResume.Interests[index] = interest;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpPut("references/{name}")]
+        public ActionResult<Profile> Put(string name, [FromBody] Reference reference)
+        {
+            var filter = initialResume.References.Find(e => e.Name == name);
+            if (filter != null)
+            {
+                int index = initialResume.References.FindIndex(0, e => e == filter);
+                initialResume.References[index] = reference;
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Put target not found");
+            }
+
+        }
+        #endregion
+
+        #region DeleteMethodsRegion
+        [BasicAuthorization]
+        [HttpDelete("basics/profiles/{network}")]
+        public ActionResult<Profile> DeleteProfile(string network)
+        {
+            var filter = initialResume.Basic.Profiles.Find(e => e.Network == network);
+            if (filter != null)
+            {
+                int index = initialResume.Basic.Profiles.FindIndex(0, e => e == filter);
+                initialResume.Basic.Profiles.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpDelete("works/{company}")]
+        public ActionResult<Profile> DeleteWork(string company)
+        {
+            var filter = initialResume.Works.Find(e => e.Company == company);
+            if (filter != null)
+            {
+                int index = initialResume.Works.FindIndex(0, e => e == filter);
+                initialResume.Works.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpDelete("volunteer/{organization}")]
+        public ActionResult<Profile> DeleteWork(string company)
+        {
+            var filter = initialResume.Works.Find(e => e.Company == company);
+            if (filter != null)
+            {
+                int index = initialResume.Works.FindIndex(0, e => e == filter);
+                initialResume.Works.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using ResumeApi.Models;
 using System;
 using System.Collections.Generic;
@@ -810,7 +811,21 @@ namespace ResumeApi.Controllers
         #endregion
 
         #region PatchMethods
+        [BasicAuthorization]
+        [HttpPatch("basics/profiles/{network}")]
+        public IActionResult Patch(string network, [FromBody] JsonPatchDocument<Profile> patchEntity)
+        {
+            var entity = initialResume.Basic.Profiles.FirstOrDefault(e => e.Network == network);
 
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            patchEntity.ApplyTo(entity, ModelState);
+
+            return Ok(entity);
+        }
 
         #endregion
     }

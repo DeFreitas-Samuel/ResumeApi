@@ -16,23 +16,22 @@ namespace ResumeApi.Controllers
         static Basic basic = new Basic("Samuel", "Ing. Soft", "1.jpg", "s@gmial.com", "8095554433", "www.samuel.com", "Buen empleado",
                                 "Calle D", "1074", "Santo Domingo", "DR", "Caribbean", "twitter", "Samuel123", "twitter.com/Samuel123");
         static Resume initialResume = new Resume(basic);
-        
+        static int version = 1;
 
-        // GET: api/<resume>
+        #region GetMethods
         [HttpGet]
         public ActionResult<Resume> Get()
         {
             return initialResume;
         }
 
-        // GET api/<resume>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("basics")]
+        public ActionResult<Basic> GetBasic()
         {
-            return "value";
+            return initialResume.Basic;
         }
 
-        // POST api/<resume>
+        #endregion
         [HttpPost]
         public void Post([FromBody] string value)
         {

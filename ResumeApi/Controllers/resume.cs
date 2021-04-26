@@ -665,13 +665,13 @@ namespace ResumeApi.Controllers
 
         [BasicAuthorization]
         [HttpDelete("volunteer/{organization}")]
-        public ActionResult<Profile> DeleteWork(string company)
+        public ActionResult<Profile> DeleteVolunteer(string organization)
         {
-            var filter = initialResume.Works.Find(e => e.Company == company);
+            var filter = initialResume.Volunteers.Find(e => e.Organization == organization);
             if (filter != null)
             {
-                int index = initialResume.Works.FindIndex(0, e => e == filter);
-                initialResume.Works.RemoveAt(index);
+                int index = initialResume.Volunteers.FindIndex(0, e => e == filter);
+                initialResume.Volunteers.RemoveAt(index);
                 return NoContent();
             }
             else
@@ -680,6 +680,138 @@ namespace ResumeApi.Controllers
             }
 
         }
+
+
+        [BasicAuthorization]
+        [HttpDelete("education/{institution}")]
+        public ActionResult<Profile> DeleteEducation(string institution)
+        {
+            var filter = initialResume.Educations.Find(e => e.Institution == institution);
+            if (filter != null)
+            {
+                int index = initialResume.Educations.FindIndex(0, e => e == filter);
+                initialResume.Educations.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpDelete("awards/{title}")]
+        public ActionResult<Profile> DeleteAward(string title)
+        {
+            var filter = initialResume.Awards.Find(e => e.Title == title);
+            if (filter != null)
+            {
+                int index = initialResume.Awards.FindIndex(0, e => e == filter);
+                initialResume.Awards.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpDelete("publications/{name}")]
+        public ActionResult<Profile> DeletePublication(string name)
+        {
+            var filter = initialResume.Publications.Find(e => e.Name == name);
+            if (filter != null)
+            {
+                int index = initialResume.Publications.FindIndex(0, e => e == filter);
+                initialResume.Publications.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpDelete("skills/{name}")]
+        public ActionResult<Profile> DeleteSkill(string name)
+        {
+            var filter = initialResume.Skills.Find(e => e.Name == name);
+            if (filter != null)
+            {
+                int index = initialResume.Skills.FindIndex(0, e => e == filter);
+                initialResume.Skills.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpDelete("languages/{name}")]
+        public ActionResult<Profile> DeleteLanguages(string name)
+        {
+            var filter = initialResume.Languages.Find(e => e.Languag == name);
+            if (filter != null)
+            {
+                int index = initialResume.Languages.FindIndex(0, e => e == filter);
+                initialResume.Languages.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpDelete("interests/{name}")]
+        public ActionResult<Profile> DeleteInterests(string name)
+        {
+            var filter = initialResume.Interests.Find(e => e.Name == name);
+            if (filter != null)
+            {
+                int index = initialResume.Interests.FindIndex(0, e => e == filter);
+                initialResume.Interests.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+
+        [BasicAuthorization]
+        [HttpDelete("references/{name}")]
+        public ActionResult<Profile> DeleteReference(string name)
+        {
+            var filter = initialResume.References.Find(e => e.Name == name);
+            if (filter != null)
+            {
+                int index = initialResume.References.FindIndex(0, e => e == filter);
+                initialResume.References.RemoveAt(index);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound("Delete target not found");
+            }
+
+        }
+        #endregion
+
+        #region PatchMethods
+
+
         #endregion
     }
 }

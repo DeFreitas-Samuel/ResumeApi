@@ -20,7 +20,7 @@ namespace ResumeApi.Models
         public List<Interest> Interests { get => interests; set => interests = value; }
         public List<Reference> References { get => references; set => references = value; }
 
-        public Resume(Basic basic) 
+        public Resume(Basic basic, List<Language> languages) 
         {
             Basic = basic;
         }
